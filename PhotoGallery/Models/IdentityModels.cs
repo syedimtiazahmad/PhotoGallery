@@ -29,5 +29,8 @@ namespace PhotoGallery.Models
         {
             return new ApplicationDbContext();
         }
+        public DbSet<Event> Event { set; get; }
+        public DbSet<User> User { set; get; }
+        public DbSet<Role> Role { set; get; } 
     }
 }
