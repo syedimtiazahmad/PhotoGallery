@@ -5,7 +5,7 @@
 }
 
 <h2>Login</h2>
-@using(Html.BeginForm("New", "Sessions"))
+@using(Html.BeginForm("Create", "Sessions"))
 { 
     <div class="form-group">
         @Html.LabelFor(m=>m.Email)<br />
@@ -14,7 +14,7 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.Password)<br />
-        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
     </div>
     <button class="btn btn-primary" type="submit">Login</button>
 }
