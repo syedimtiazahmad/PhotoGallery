@@ -14,7 +14,8 @@ namespace PhotoGallery.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Registrations
+        // GET: /SignUp
+        [Route("SignUp")]
         public ActionResult New()
         {
             var user = new User();
@@ -41,28 +42,37 @@ namespace PhotoGallery.Controllers
             return View(user);
         }
 
-        // GET: Registrations/Create
-        public ActionResult Create()
+        // POST: Registrations/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(User user_params)
         {
-            return View();
+            if (!ModelState.IsValid) {
+                var user = new User();
+                return View("New");
+            }
+            db.User.Add(user_params);
+            db.SaveChanges();
+            return RedirectToAction("New", "Sessions");
+
         }
 
         // POST: Registrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,age,Email,Password")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,FirstName,LastName,age,Email,Password")] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.User.Add(user);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
         // GET: Registrations/Edit/5
         public ActionResult Edit(int? id)
