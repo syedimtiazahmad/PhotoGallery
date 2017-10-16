@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201710142036376_createRole.Designer.cs">
       <DependentUpon>201710142036376_createRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710161910169_AddUserEmailAndPassword.cs" />
+    <Compile Include="Migrations\201710161910169_AddUserEmailAndPassword.Designer.cs">
+      <DependentUpon>201710161910169_AddUserEmailAndPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710142036376_createRole.resx">
       <DependentUpon>201710142036376_createRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710161910169_AddUserEmailAndPassword.resx">
+      <DependentUpon>201710161910169_AddUserEmailAndPassword.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
