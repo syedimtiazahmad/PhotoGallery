@@ -1,0 +1,43 @@
+﻿@model PhotoGallery.ViewModels.UserFormViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Profile</h2>
+
+<div class="row">
+    @using (Html.BeginForm("Update", "Users"))
+    {
+        @Html.HttpMethodOverride(HttpVerbs.Put)
+        <div class="col-md-12 form-group">
+            @Html.LabelFor(m => m.User.FirstName)
+            @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control" })
+        </div>
+        <div class="col-md-12 form-group">
+            @Html.LabelFor(m => m.User.LastName)
+            @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control" })
+        </div>
+        <div class="col-md-12 form-group">
+            @Html.LabelFor(m => m.User.Email)
+            @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.User.Email)
+        </div>
+        <div class="col-md-12 form-group">
+            @Html.LabelFor(m => m.User.age)
+            @Html.TextBoxFor(m => m.User.age, new { @class = "form-control" })
+        </div>
+            if (Model.User.Role.Name == "Admin")
+            {
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(m => m.User.RoleId)
+                    @Html.DropDownListFor(m => m.User.RoleId, new SelectList(Model.Roles, "Id", "Name"), "Select Role", new { @class = "form-control" })
+                </div>
+            }
+            <br />
+            @Html.HiddenFor(m => m.User.Id)
+            @Html.HiddenFor(m => m.User.Password)
+            @Html.AntiForgeryToken()
+            <button class="btn btn-primary" type="submit">Update</button>
+    }
+</div>

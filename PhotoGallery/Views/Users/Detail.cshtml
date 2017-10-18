@@ -1,0 +1,26 @@
+﻿@model PhotoGallery.Models.User
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.LabelFor(m=>m.FirstName): @Model.FirstName
+    </div>
+    <div class="col-md-12">
+        @Html.LabelFor(m => m.LastName): @Model.LastName
+    </div>
+    <div class="col-md-12">
+        @Html.LabelFor(m => m.Email): @Model.Email
+    </div>
+    <div class="col-md-12">
+        @Html.LabelFor(m => m.age): @Model.age
+    </div><br />
+    <div class="col-md-12">
+        @Html.ActionLink("Edit", "Edit", "Users", new { id=Model.Id}, new { @class = "btn btn-primary" })
+    </div>
+</div>

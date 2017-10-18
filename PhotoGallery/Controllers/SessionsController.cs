@@ -43,7 +43,8 @@ namespace PhotoGallery.Controllers
             //var password_salt = CreateSalt();
             //var hash = GenerateHash(user_params.Password, password_salt);
             //return Content(hash);
-            return RedirectToAction("New");
+            Session["user_id"] = user.Id;
+            return RedirectToAction("Detail", "Users", new { id=user.Id});
         }
 
         //private static string GenerateHash(string value, string salt)
