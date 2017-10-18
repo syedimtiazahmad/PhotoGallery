@@ -36,5 +36,18 @@ namespace PhotoGallery.Controllers
         {
             return View();
         }
+
+        public ActionResult New()
+        {
+            var dbEvent = new Event();
+            //if (UserSession() == 0)
+            //    return RedirectToAction("Index", "Sessions");
+            return View(dbEvent);
+        }
+
+        private int UserSession()
+        {
+            return Convert.ToInt32(Session["user_id"]);
+        }
     }
 }
