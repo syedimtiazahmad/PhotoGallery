@@ -1,0 +1,23 @@
+﻿@model PhotoGallery.Models.User
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Events</h2>
+<div class="row">
+    <div class="grid">
+        <div class="grid-item">a</div>
+        <div class="grid-item grid-item--width2">ABC</div>
+        <div class="grid-item">b</div>
+    </div>
+</div>
+@Scripts.Render("~/Scripts/masonry.min.js")
+<script>
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry(elem, {
+        // options
+        itemSelector: '.grid-item',
+        columnWidth: 200
+    });
+</script>
