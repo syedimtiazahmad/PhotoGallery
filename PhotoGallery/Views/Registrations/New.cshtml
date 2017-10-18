@@ -34,6 +34,7 @@
         @Html.ValidationMessageFor(m => m.Password)
     </div>
     <div>
+        @Html.HiddenFor(m=>m.RoleId, new { Value=2} )
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">SignUp</button>
     </div>

@@ -27,6 +27,8 @@ namespace PhotoGallery.Controllers
         [Route("Login")]
         public ActionResult New()
         {
+            if (UserSession() != 0)
+                return RedirectToAction("Index", "Events");
             ViewBag.Title = "Sign In";
             var user = new User();
             return View(user);
@@ -46,6 +48,13 @@ namespace PhotoGallery.Controllers
             Session["user_id"] = user.Id;
             return RedirectToAction("Detail", "Users", new { id=user.Id});
         }
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id != 0 || id != null)
+                Session.Remove("user_id");
+            return RedirectToAction("Index", "Events");
+        }
 
         //private static string GenerateHash(string value, string salt)
         //{
@@ -61,5 +70,9 @@ namespace PhotoGallery.Controllers
         //    rng.GetBytes(buff);
         //    return Convert.ToBase64String(buff);
         //}
+        private int UserSession()
+        {
+            return Convert.ToInt32(Session["user_id"]);
+        }
     }
 }

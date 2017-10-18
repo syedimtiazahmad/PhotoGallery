@@ -18,27 +18,9 @@ namespace PhotoGallery.Controllers
         [Route("SignUp")]
         public ActionResult New()
         {
+            if (UserSession() != 0)
+                return RedirectToAction("Index", "Events");
             var user = new User();
-            return View(user);
-        }
-      
-        public ActionResult Index()
-        {
-            return View(db.User.ToList());
-        }
-
-        // GET: Registrations/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.User.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
             return View(user);
         }
 
@@ -55,6 +37,11 @@ namespace PhotoGallery.Controllers
             db.SaveChanges();
             return RedirectToAction("New", "Sessions");
 
+        }
+
+        private int UserSession()
+        {
+            return Convert.ToInt32(Session["user_id"]);
         }
     }
 }

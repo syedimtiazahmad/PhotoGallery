@@ -306,12 +306,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sessions\New.cshtml" />
-    <Content Include="Views\Registrations\Create.cshtml" />
-    <Content Include="Views\Registrations\Delete.cshtml" />
-    <Content Include="Views\Registrations\Details.cshtml" />
-    <Content Include="Views\Registrations\Edit.cshtml" />
-    <Content Include="Views\Registrations\Index.cshtml" />
-    <Content Include="Views\Registrations\registration.cshtml" />
     <Content Include="Views\Registrations\New.cshtml" />
     <Content Include="Views\Events\Events.cshtml" />
     <Content Include="Views\Users\Detail.cshtml" />
