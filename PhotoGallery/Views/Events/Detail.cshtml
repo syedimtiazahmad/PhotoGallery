@@ -1,0 +1,43 @@
+﻿@model PhotoGallery.ViewModels.EventFormViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h2 class="event-title">@Model.Event.Name.ToUpper()</h2>
+</div>
+
+<br />
+<div class="row">
+    <div class="event-gallery">
+        @foreach (var img in Model.Images)
+        {
+            <div class="item">
+                <img src="@img.Path" class="img" style="width: 180px;" />
+            </div>
+        }
+    </div>
+            
+    <div class="event-description">
+        <p>
+            @Model.Event.Description
+        </p>
+    </div>        
+</div>
+
+<div class="row event-btns-section">
+    <div class="btns-section">
+        @Html.ActionLink("Edit", "Edit", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/masonry.min.js")
+<script>
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry(elem, {
+        // options
+        itemSelector: '.grid-item',
+        columnWidth: 200
+    });
+</script>

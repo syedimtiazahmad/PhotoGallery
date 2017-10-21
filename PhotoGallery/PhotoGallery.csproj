@@ -233,15 +233,33 @@
     <Compile Include="Migrations\201710181909198_addColumnRoleIdToUsers.Designer.cs">
       <DependentUpon>201710181909198_addColumnRoleIdToUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710200245497_AddImageTable.cs" />
+    <Compile Include="Migrations\201710200245497_AddImageTable.Designer.cs">
+      <DependentUpon>201710200245497_AddImageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200314191_AddIndexAndForiegnKeyToEventIdInImages.cs" />
+    <Compile Include="Migrations\201710200314191_AddIndexAndForiegnKeyToEventIdInImages.Designer.cs">
+      <DependentUpon>201710200314191_AddIndexAndForiegnKeyToEventIdInImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710201647128_AddColumnUserIdToEvents.cs" />
+    <Compile Include="Migrations\201710201647128_AddColumnUserIdToEvents.Designer.cs">
+      <DependentUpon>201710201647128_AddColumnUserIdToEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710211848207_addColumnNameToImages.cs" />
+    <Compile Include="Migrations\201710211848207_addColumnNameToImages.Designer.cs">
+      <DependentUpon>201710211848207_addColumnNameToImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EventFormViewModel.cs" />
     <Compile Include="ViewModels\UserFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -312,9 +330,11 @@
     <Content Include="Views\Users\Detail.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Events\New.cshtml" />
+    <Content Include="Views\Events\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -345,6 +365,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710181909198_addColumnRoleIdToUsers.resx">
       <DependentUpon>201710181909198_addColumnRoleIdToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200245497_AddImageTable.resx">
+      <DependentUpon>201710200245497_AddImageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200314191_AddIndexAndForiegnKeyToEventIdInImages.resx">
+      <DependentUpon>201710200314191_AddIndexAndForiegnKeyToEventIdInImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710201647128_AddColumnUserIdToEvents.resx">
+      <DependentUpon>201710201647128_AddColumnUserIdToEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710211848207_addColumnNameToImages.resx">
+      <DependentUpon>201710211848207_addColumnNameToImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

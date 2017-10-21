@@ -5,10 +5,13 @@ using System.Web;
 using System.Data.Entity;
 namespace PhotoGallery.Models
 {
-    public class Event:DbContext
+    public class Event
     {
         public int Id { get; set; }
         public string Name { set; get; }
         public string Description { set; get; }
+        public ICollection<Image> Images { set; get; }
+
+        public int UserId { set; get; }
     }
 }

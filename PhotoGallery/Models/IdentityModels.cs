@@ -32,5 +32,6 @@ namespace PhotoGallery.Models
         public DbSet<Event> Event { set; get; }
         public DbSet<User> User { set; get; }
         public DbSet<Role> Role { set; get; } 
+        public DbSet<Image> Image { set; get; }
     }
 }
