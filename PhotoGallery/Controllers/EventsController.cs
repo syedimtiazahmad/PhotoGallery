@@ -40,9 +40,12 @@ namespace PhotoGallery.Controllers
         }
 
 
-        public ActionResult Index()
+        public ActionResult Index(int? user_id)
         {
-            var dbEvents = _context.Event.Include(e=>e.Images).ToList();
+            var dbEvents = _context.Event.Include(e => e.Images);
+            if (Convert.ToInt32(user_id) != 0)
+                dbEvents = dbEvents.Where(e => e.UserId == user_id);
+
             var viewModel = new EventFormViewModel
             {
                 Events = dbEvents.AsQueryable(),

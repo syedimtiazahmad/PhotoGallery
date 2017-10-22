@@ -46,6 +46,7 @@ namespace PhotoGallery.Controllers
             //var hash = GenerateHash(user_params.Password, password_salt);
             //return Content(hash);
             Session["user_id"] = user.Id;
+            Session["user_email"] = user.Email;
             return RedirectToAction("Detail", "Users", new { id=user.Id});
         }
         [HttpGet]

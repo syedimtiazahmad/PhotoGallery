@@ -6,7 +6,10 @@
 
 <div class="row">
     <h2 class="pull-left">Events</h2>
-    @Html.ActionLink("New Event", "New", "Events", new { @class = "pull-right btn btn-primary" })
+    @if (Convert.ToInt32(Session["user_id"]) != 0)
+    {
+        @Html.ActionLink("New Event", "New", "Events", new { @class = "pull-right btn btn-primary" })
+    }
 </div>
 
 <br />
@@ -19,7 +22,7 @@
                 <div class="grid-item grid-item--width2">
                     <a href="/Events/Detail/@Model.Events.ToList()[i].Id" class="img-anchor">
                         <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" />
-                    </a>                    
+                    </a>
                     <div>
                         <strong>@Model.Events.ToList()[i].Name</strong>
                         <p>@Model.Events.ToList()[i].Description</p>
