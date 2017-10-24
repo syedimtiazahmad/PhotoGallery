@@ -22,7 +22,17 @@ namespace PhotoGallery.Controllers
         {
             _context.Dispose();
         }
+
         // GET: Users
+        public ActionResult Index()
+        {
+            if (UserSession() == 0)
+                return RedirectToAction("New", "Sessions");
+            var users =  _context.User.ToList();
+            var viewModel = new UsersFetchViewModel { Users = users.AsQueryable() };
+            return View(viewModel);
+        }
+
         public ActionResult Detail(int id)
         {
             if (UserSession() == 0)
@@ -59,8 +69,20 @@ namespace PhotoGallery.Controllers
             user.age = user_params.User.age;
             user.Role = _context.Role.SingleOrDefault(m => m.Id == user_params.User.RoleId);
             user.RoleId = user_params.User.RoleId;
+            user.Permission = user_params.User.Permission;
             _context.SaveChanges();
             return RedirectToAction("Detail", "Users", new { id=user.Id} );
+        }
+
+        [HttpGet]
+        public  ActionResult Delete(int id)
+        {
+            if (UserSession() == 0)
+                return RedirectToAction("New", "Sessions");
+            var user = _context.User.SingleOrDefault(u => u.Id == id);
+            _context.User.Remove(user);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Users");
         }
 
         private int UserSession() {

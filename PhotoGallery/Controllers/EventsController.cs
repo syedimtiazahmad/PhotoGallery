@@ -31,10 +31,13 @@ namespace PhotoGallery.Controllers
         {
             var dbEvent = _context.Event.SingleOrDefault(m => m.Id == id);
             var images = _context.Image.Where(m => m.EventId == id);
+            int user_id = UserSession();
+            var current_user = _context.User.SingleOrDefault(u => u.Id == user_id);
             var viewModel = new EventFormViewModel
             {
                 Event = dbEvent,
-                Images = images
+                Images = images,
+                User = current_user
             };
             return View(viewModel);
         }

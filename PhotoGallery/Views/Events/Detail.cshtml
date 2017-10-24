@@ -25,13 +25,16 @@
         </p>
     </div>        
 </div>
-@if (Convert.ToInt32(Session["user_id"]) != 0 && Model.Event.UserId == Convert.ToInt32(Session["user_id"]))
+@if (Convert.ToInt32(Session["user_id"]) != 0 && (Model.Event.UserId == Convert.ToInt32(Session["user_id"]) || Model.User.RoleId == 1)  )
 {
-    <div class="row event-btns-section">
-        <div class="btns-section">
-            @Html.ActionLink("Edit", "Edit", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" })
+    if (Model.User.RoleId == 1 || Model.User.Permission)
+    {
+        <div class="row event-btns-section">
+            <div class="btns-section">
+                @Html.ActionLink("Edit", "Edit", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" })
+            </div>
         </div>
-    </div>
+    }
 }
 
 @Scripts.Render("~/Scripts/masonry.min.js")

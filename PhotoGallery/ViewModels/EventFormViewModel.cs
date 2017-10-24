@@ -11,5 +11,6 @@ namespace PhotoGallery.ViewModels
         public IQueryable<Event> Events { set; get; }
         public IQueryable<Image> Images { set; get; }
         public HttpPostedFileBase[] UploadedImages { set; get; }
+        public User User { set; get; }
     }
 }

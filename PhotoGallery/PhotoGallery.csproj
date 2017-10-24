@@ -253,6 +253,10 @@
     <Compile Include="Migrations\201710240248581_AddColumnsToEvents.Designer.cs">
       <DependentUpon>201710240248581_AddColumnsToEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710241844216_addColumnPermissionToUsers.cs" />
+    <Compile Include="Migrations\201710241844216_addColumnPermissionToUsers.Designer.cs">
+      <DependentUpon>201710241844216_addColumnPermissionToUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -266,6 +270,7 @@
     <Compile Include="ViewModels\EventFormViewModel.cs" />
     <Compile Include="ViewModels\EventsParametersViewModel.cs" />
     <Compile Include="ViewModels\UserFormViewModel.cs" />
+    <Compile Include="ViewModels\UsersFetchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -337,6 +342,7 @@
     <Content Include="Views\Events\New.cshtml" />
     <Content Include="Views\Events\Detail.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710240248581_AddColumnsToEvents.resx">
       <DependentUpon>201710240248581_AddColumnsToEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710241844216_addColumnPermissionToUsers.resx">
+      <DependentUpon>201710241844216_addColumnPermissionToUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

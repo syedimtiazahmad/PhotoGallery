@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        @Html.LabelFor(m=>m.FirstName): @Model.FirstName
+        @Html.LabelFor(m => m.FirstName): @Model.FirstName
     </div>
     <div class="col-md-12">
         @Html.LabelFor(m => m.LastName): @Model.LastName
@@ -19,8 +19,15 @@
     </div>
     <div class="col-md-12">
         @Html.LabelFor(m => m.age): @Model.age
-    </div><br />
+    </div>
+    @if(Model.RoleId == 1)      // user equal to admin
+    {
+        <div class="col-md-12">
+            @Html.LabelFor(m=> m.Permission): @Model.Permission
+        </div>
+    }
+    <br />
     <div class="col-md-12">
-        @Html.ActionLink("Edit", "Edit", "Users", new { id=Model.Id}, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit", "Edit", "Users", new { id = Model.Id }, new { @class = "btn btn-primary" })
     </div>
 </div>

@@ -27,5 +27,7 @@ namespace PhotoGallery.Models
         
         public Role Role { set; get; }
         public int RoleId { set; get; }
+
+        public bool Permission { set; get; }
     }
 }

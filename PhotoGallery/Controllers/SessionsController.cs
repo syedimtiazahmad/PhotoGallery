@@ -42,18 +42,21 @@ namespace PhotoGallery.Controllers
             var user = _context.User.SingleOrDefault(m=>m.Email == user_params.Email);
             if (user == null)
                 return RedirectToAction("New");
-            //var password_salt = CreateSalt();
-            //var hash = GenerateHash(user_params.Password, password_salt);
-            //return Content(hash);
             Session["user_id"] = user.Id;
             Session["user_email"] = user.Email;
+            Session["current_user_role_id"] = user.RoleId;
             return RedirectToAction("Detail", "Users", new { id=user.Id});
         }
+
         [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id != 0 || id != null)
+            {
                 Session.Remove("user_id");
+                Session.Remove("user_email");
+                Session.Remove("current_user_role_id");
+            }                
             return RedirectToAction("Index", "Events");
         }
 

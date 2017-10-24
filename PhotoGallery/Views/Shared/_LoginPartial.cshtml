@@ -23,12 +23,18 @@
     }
     else
     {
-        <li>@Html.ActionLink("My Events", "Index", "Events", new { user_id= Convert.ToInt32(Session["user_id"]) }, null )</li>
+        if (Convert.ToInt32(Session["current_user_role_id"]) == 1)
+        {
+            <li>@Html.ActionLink("Users", "Index", "Users", null, null)</li>
+        }
+        <li>@Html.ActionLink("My Events", "Index", "Events", new { user_id = Convert.ToInt32(Session["user_id"]) }, null)</li>
         if (Session["user_email"].ToString().Length != 0)
         {
-            <li>@Html.ActionLink(Session["user_email"].ToString(), "Detail", "Users", new { id=Convert.ToInt32(Session["user_id"]) }, null )</li>
+            <li>@Html.ActionLink(Session["user_email"].ToString(), "Detail", "Users", new { id = Convert.ToInt32(Session["user_id"]) }, null)</li>
         }
         <li>@Html.ActionLink("Logout", "Delete", "Sessions", new { id = Convert.ToInt32(Session["user_id"]) }, htmlAttributes: new { id = "loginLink" })</li>
     }
 </ul>
+
+
 

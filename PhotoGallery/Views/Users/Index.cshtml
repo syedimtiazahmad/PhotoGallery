@@ -1,0 +1,35 @@
+﻿@model PhotoGallery.ViewModels.UsersFetchViewModel
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users</h2>
+
+<div class="row">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.age</td>
+                    <td>
+                        @Html.ActionLink("Detail", "Detail", "Users", new { id= Convert.ToInt32(Session["user_id"])}, null) |
+                        @Html.ActionLink("Edit", "Edit", "Users", new { id = Convert.ToInt32(Session["user_id"]) }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Users", new { id = Convert.ToInt32(Session["user_id"]) }, new { onclick = "return confirm('Are you sure you?');" } )
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
