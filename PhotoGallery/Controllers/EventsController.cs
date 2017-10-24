@@ -40,12 +40,14 @@ namespace PhotoGallery.Controllers
         }
 
 
-        public ActionResult Index(int? user_id)
+        public ActionResult Index(EventsParametersViewModel event_params)
         {
             var dbEvents = _context.Event.Include(e => e.Images);
-            if (Convert.ToInt32(user_id) != 0)
-                dbEvents = dbEvents.Where(e => e.UserId == user_id);
-
+            if (Convert.ToInt32(event_params.user_id) != 0)
+                dbEvents = dbEvents.Where(e => e.UserId == event_params.user_id);
+            //dbEvents = dbEvents.Where(m=>m.Name.Contains("Hallow"));
+            if (event_params != null && event_params.search != null)
+                dbEvents = dbEvents.Where(e => e.Name.Contains(event_params.search) || e.location.Contains(event_params.search) );
             var viewModel = new EventFormViewModel
             {
                 Events = dbEvents.AsQueryable(),
@@ -75,20 +77,23 @@ namespace PhotoGallery.Controllers
             int id = eventModel.Event.Id;
             //ArrayList _filenames = new ArrayList();
             //ArrayList _filePath = new ArrayList();
-            foreach(var img in eventModel.UploadedImages)
+            if (eventModel.UploadedImages[0] != null)
             {
-                Image imgObj = new Image();
-                string filename = Path.GetFileNameWithoutExtension(img.FileName);
-                string extension = Path.GetExtension(img.FileName);
-                filename = filename + DateTime.Now.ToString("yymm") + extension;
-                imgObj.Name = filename;
-                string relative_path = "/Images/" + filename;
-                imgObj.Path = relative_path;
-                string filepath = Server.MapPath("~"+ relative_path);
-                imgObj.EventId = id;
-                img.SaveAs(filepath);
-                _context.Image.Add(imgObj);
-                _context.SaveChanges();
+                foreach (var img in eventModel.UploadedImages)
+                {
+                    Image imgObj = new Image();
+                    string filename = Path.GetFileNameWithoutExtension(img.FileName);
+                    string extension = Path.GetExtension(img.FileName);
+                    filename = filename + DateTime.Now.ToString("yymm") + extension;
+                    imgObj.Name = filename;
+                    string relative_path = "/Images/" + filename;
+                    imgObj.Path = relative_path;
+                    string filepath = Server.MapPath("~" + relative_path);
+                    imgObj.EventId = id;
+                    img.SaveAs(filepath);
+                    _context.Image.Add(imgObj);
+                    _context.SaveChanges();
+                }
             }
             return RedirectToAction("Detail", new { id= id});
         }
@@ -113,26 +118,31 @@ namespace PhotoGallery.Controllers
             dbEvent.Name = eventModel.Event.Name;
             dbEvent.Description = eventModel.Event.Description;
             dbEvent.UserId = eventModel.Event.UserId;
-            var imgs = _context.Image.Where(m => m.EventId == dbEvent.Id);
-            foreach(var img in imgs)
+            dbEvent.location = eventModel.Event.location;
+            if(eventModel.UploadedImages[0] != null)
             {
-                _context.Image.Remove(img);
+                var imgs = _context.Image.Where(m => m.EventId == dbEvent.Id);
+                foreach (var img in imgs)
+                {
+                    _context.Image.Remove(img);
+                }
+                foreach (var img in eventModel.UploadedImages)
+                {
+                    Image imgObj = new Image();
+                    string filename = Path.GetFileNameWithoutExtension(img.FileName);
+                    string extension = Path.GetExtension(img.FileName);
+                    filename = filename + DateTime.Now.ToString("yymm") + extension;
+                    imgObj.Name = filename;
+                    string relative_path = "/Images/" + filename;
+                    imgObj.Path = relative_path;
+                    string filepath = Server.MapPath("~" + relative_path);
+                    imgObj.EventId = dbEvent.Id;
+                    img.SaveAs(filepath);
+                    _context.Image.Add(imgObj);
+                    _context.SaveChanges();
+                }
             }
-            foreach(var img in eventModel.UploadedImages)
-            {
-                Image imgObj = new Image();
-                string filename = Path.GetFileNameWithoutExtension(img.FileName);
-                string extension = Path.GetExtension(img.FileName);
-                filename = filename + DateTime.Now.ToString("yymm") + extension;
-                imgObj.Name = filename;
-                string relative_path = "/Images/" + filename;
-                imgObj.Path = relative_path;
-                string filepath = Server.MapPath("~" + relative_path);
-                imgObj.EventId = dbEvent.Id;
-                img.SaveAs(filepath);
-                _context.Image.Add(imgObj);
-                _context.SaveChanges();
-            }
+            _context.SaveChanges();
             return RedirectToAction("Detail", new { id = eventModel.Event.Id });
         }
         private int UserSession()

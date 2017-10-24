@@ -11,7 +11,6 @@
         @Html.ActionLink("New Event", "New", "Events", new { @class = "pull-right btn btn-primary" })
     }
 </div>
-
 <br />
 <div class="row">
     <div class="grid">
@@ -24,7 +23,8 @@
                         <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" />
                     </a>
                     <div>
-                        <strong>@Model.Events.ToList()[i].Name</strong>
+                        <strong>@Model.Events.ToList()[i].Name</strong><br />
+                        <small>@Model.Events.ToList()[i].location</small>
                         <p>@Model.Events.ToList()[i].Description</p>
                     </div>
                 </div>
@@ -36,7 +36,8 @@
                         <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" />
                     </a>
                     <div>
-                        <strong>@Model.Events.ToList()[i].Name</strong>
+                        <strong>@Model.Events.ToList()[i].Name</strong><br />
+                        <small>@Model.Events.ToList()[i].location</small>
                         <p>@Model.Events.ToList()[i].Description</p>
                     </div>
                 </div>

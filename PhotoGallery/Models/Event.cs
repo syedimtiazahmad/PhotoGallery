@@ -13,5 +13,9 @@ namespace PhotoGallery.Models
         public ICollection<Image> Images { set; get; }
 
         public int UserId { set; get; }
+
+        public string location { set; get; }
+        public DateTime? CreatedAt { set; get; }
+        public DateTime? UpdatedAt { set; get; }
     }
 }

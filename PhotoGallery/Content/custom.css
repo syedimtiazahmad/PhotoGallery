@@ -53,3 +53,12 @@
     padding: 10px;
     text-align: justify;
 }
+.btn-default{
+    color: black !important;
+}
+.btn-default:hover{
+    color: black !important;
+}
+.form-control{
+    color: black !important;
+}
