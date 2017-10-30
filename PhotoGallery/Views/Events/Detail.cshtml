@@ -3,7 +3,6 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="row">
     <h2 class="event-title">@Model.Event.Name.ToUpper()</h2>
 </div>
@@ -13,7 +12,10 @@
     <div class="event-gallery">
         @foreach (var img in Model.Images)
         {
-            <div class="item">
+            <div class="item pos-rel">
+                <a href="/Events/Images/@img.Id/AddFrame" class="absolute-pencil">
+                    <i class="glyphicon glyphicon-pencil" title="add Frame"></i>
+                </a>                
                 <img src="@img.Path" class="img" style="width: 180px;" alt="@img.Name" />
             </div>
         }
@@ -37,8 +39,37 @@
     }
 }
 
+
+@*<button id="shareBtn">Share</button>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>*@
 @Scripts.Render("~/Scripts/masonry.min.js")
 <script>
+    //window.fbAsyncInit = function () {
+    //    FB.init({
+    //        appId: '915014835330710',
+    //        autoLogAppEvents: true,
+    //        xfbml: true,
+    //        version: 'v2.10'
+    //    });
+    //    FB.AppEvents.logPageView();
+    //};
+    //(function (d, s, id) {
+    //    var js, fjs = d.getElementsByTagName(s)[0];
+    //    if (d.getElementById(id)) return;
+    //    js = d.createElement(s); js.id = id;
+    //    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1396861977224095";
+    //    fjs.parentNode.insertBefore(js, fjs);
+    //}(document, 'script', 'facebook-jssdk'));    
+    //document.getElementById('shareBtn').onclick = function () {
+    //    console.log(window.location.href);
+    //  FB.ui({
+    //    method: 'share',
+    //    display: 'popup',
+    //    href: window.location.href,
+    //  }, function(response){ console.log(response);});
+    //}
+
     var elem = document.querySelector('.grid');
     var msnry = new Masonry(elem, {
         // options

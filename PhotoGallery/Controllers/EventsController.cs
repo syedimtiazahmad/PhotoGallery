@@ -10,6 +10,10 @@ using PhotoGallery.Models;
 using PhotoGallery.ViewModels;
 using System.IO;
 using System.Collections;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 namespace PhotoGallery.Controllers
 {
     public class EventsController : Controller
@@ -84,7 +88,7 @@ namespace PhotoGallery.Controllers
             {
                 foreach (var img in eventModel.UploadedImages)
                 {
-                    Image imgObj = new Image();
+                    PhotoGallery.Models.Image imgObj = new PhotoGallery.Models.Image();
                     string filename = Path.GetFileNameWithoutExtension(img.FileName);
                     string extension = Path.GetExtension(img.FileName);
                     filename = filename + DateTime.Now.ToString("yymm") + extension;
@@ -131,7 +135,7 @@ namespace PhotoGallery.Controllers
                 }
                 foreach (var img in eventModel.UploadedImages)
                 {
-                    Image imgObj = new Image();
+                    PhotoGallery.Models.Image imgObj = new PhotoGallery.Models.Image();
                     string filename = Path.GetFileNameWithoutExtension(img.FileName);
                     string extension = Path.GetExtension(img.FileName);
                     filename = filename + DateTime.Now.ToString("yymm") + extension;
@@ -148,9 +152,191 @@ namespace PhotoGallery.Controllers
             _context.SaveChanges();
             return RedirectToAction("Detail", new { id = eventModel.Event.Id });
         }
+        [Route("Events/Images/{id:int}/AddFrame")]
+        public ActionResult AddFrame(int id)
+        {
+            var img = _context.Image.SingleOrDefault(i => i.Id == id);
+            var frames = _context.Frame;
+            var viewModel = new EventImageFrameViewModel
+            {
+                Image = img,
+                Frames = frames
+            };
+            return View(viewModel);
+        }
+
+        [Route("createFrame")]
+        public ActionResult CreateFrame()
+        {
+            AddFrames();
+            return View();
+        }
+
+
+        // ===========  PRIVATE METHOD ================
         private int UserSession()
         {
             return Convert.ToInt32(Session["user_id"]);
+        }
+
+        private void AddFrames()
+        {
+            DoubleColorsFrame();
+        }
+
+        private void SingleBurlyWoodFrame()
+        {
+            Response.Clear();
+            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            int height = bmp.Height;
+            int width = bmp.Width;
+
+            Bitmap bmp1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            Graphics g = Graphics.FromImage(bmp);
+            Graphics g1 = Graphics.FromImage(bmp1);
+
+            g1.DrawImage(bmp,
+            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, width, height),
+            GraphicsUnit.Pixel);
+
+            g1.TextRenderingHint = TextRenderingHint.AntiAlias;
+            Pen burlyWoodPen = new Pen(Brushes.BurlyWood);
+
+            burlyWoodPen.Width = 24.0F;
+            g1.DrawRectangle(burlyWoodPen, 0, 0, width, height);
+
+            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+
+            g.Dispose();
+            bmp.Dispose();
+            System.IO.File.Delete(_imagepath);
+            bmp1.Save(_imagepath, ImageFormat.Jpeg);
+
+            g1.Dispose();
+
+            bmp1.Dispose();
+            Response.End();
+        }
+
+        private void SinglePurpleFrame()
+        {
+            Response.Clear();
+            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            int height = bmp.Height;
+            int width = bmp.Width;
+
+            Bitmap bmp1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            Graphics g = Graphics.FromImage(bmp);
+            Graphics g1 = Graphics.FromImage(bmp1);
+
+            g1.DrawImage(bmp,
+            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, width, height),
+            GraphicsUnit.Pixel);
+
+            g1.TextRenderingHint = TextRenderingHint.AntiAlias;
+            Pen purplePen = new Pen(Brushes.Purple);
+
+            purplePen.Width = 24.0F;
+            g1.DrawRectangle(purplePen, 0, 0, width, height);
+
+            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+
+            g.Dispose();
+            bmp.Dispose();
+            System.IO.File.Delete(_imagepath);
+            bmp1.Save(_imagepath, ImageFormat.Jpeg);
+
+            g1.Dispose();
+
+            bmp1.Dispose();
+            Response.End();
+        }
+
+        private void DoubleColorsFrame()
+        {
+            Response.Clear();
+
+            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            int height = bmp.Height;
+            int width = bmp.Width;
+
+            Bitmap bmp1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            //Graphics g = Graphics.FromImage(bmp);
+            Graphics g1 = Graphics.FromImage(bmp1);
+
+            g1.DrawImage(bmp,
+            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, width, height),
+            GraphicsUnit.Pixel);
+
+            g1.TextRenderingHint = TextRenderingHint.AntiAlias;
+            Pen cadetBluePen = new Pen(Brushes.CadetBlue);
+            Pen darkGreenPen = new Pen(Brushes.DarkGreen);
+            cadetBluePen.Width = 12.0F;
+            darkGreenPen.Width = 12.0F;
+
+            g1.DrawRectangle(cadetBluePen, 5, 5, width - 12, height - 12);
+            g1.DrawRectangle(darkGreenPen, 0, 0, width, height);
+
+            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+
+            //g.Dispose();
+            bmp.Dispose();
+            System.IO.File.Delete(_imagepath);
+            bmp1.Save(_imagepath, ImageFormat.Jpeg);
+
+            g1.Dispose();
+
+            bmp1.Dispose();
+            Response.End();
+        }
+
+        private void TripleColorsFrame()
+        {
+            Response.Clear();
+
+            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            int height = bmp.Height;
+            int width = bmp.Width;
+
+            Bitmap bmp1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            //Graphics g = Graphics.FromImage(bmp);
+            Graphics g1 = Graphics.FromImage(bmp1);
+
+            g1.DrawImage(bmp,
+            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, width, height),
+            GraphicsUnit.Pixel);
+
+            g1.TextRenderingHint = TextRenderingHint.AntiAlias;
+            Pen whitePen = new Pen(Brushes.White);
+            Pen orangePen = new Pen(Brushes.Orange);
+            Pen redPen = new Pen(Brushes.Red);
+            whitePen.Width = 8.0F;
+            orangePen.Width = 8.0F;
+            redPen.Width = 8.0F;
+
+            g1.DrawRectangle(whitePen, 10, 10, width - 20, height - 20);
+            g1.DrawRectangle(orangePen, 5, 5, width - 12, height - 12);
+            g1.DrawRectangle(redPen, 0, 0, width, height);
+
+            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+
+            //g.Dispose();
+            bmp.Dispose();
+            System.IO.File.Delete(_imagepath);
+            bmp1.Save(_imagepath, ImageFormat.Jpeg);
+
+            g1.Dispose();
+
+            bmp1.Dispose();
+            Response.End();
         }
     }
 }

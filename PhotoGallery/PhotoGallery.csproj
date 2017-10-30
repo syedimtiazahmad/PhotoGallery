@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,9 +144,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -257,9 +258,22 @@
     <Compile Include="Migrations\201710241844216_addColumnPermissionToUsers.Designer.cs">
       <DependentUpon>201710241844216_addColumnPermissionToUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710301924269_AddFrameTable.cs" />
+    <Compile Include="Migrations\201710301924269_AddFrameTable.Designer.cs">
+      <DependentUpon>201710301924269_AddFrameTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710301925527_PopulateFrames.cs" />
+    <Compile Include="Migrations\201710301925527_PopulateFrames.Designer.cs">
+      <DependentUpon>201710301925527_PopulateFrames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710301940283_addForeignKeyToImage.cs" />
+    <Compile Include="Migrations\201710301940283_addForeignKeyToImage.Designer.cs">
+      <DependentUpon>201710301940283_addForeignKeyToImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Frame.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -268,6 +282,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EventFormViewModel.cs" />
+    <Compile Include="ViewModels\EventImageFrameViewModel.cs" />
     <Compile Include="ViewModels\EventsParametersViewModel.cs" />
     <Compile Include="ViewModels\UserFormViewModel.cs" />
     <Compile Include="ViewModels\UsersFetchViewModel.cs" />
@@ -343,6 +358,7 @@
     <Content Include="Views\Events\Detail.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Events\AddFrame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -395,6 +411,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710241844216_addColumnPermissionToUsers.resx">
       <DependentUpon>201710241844216_addColumnPermissionToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301924269_AddFrameTable.resx">
+      <DependentUpon>201710301924269_AddFrameTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301925527_PopulateFrames.resx">
+      <DependentUpon>201710301925527_PopulateFrames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301940283_addForeignKeyToImage.resx">
+      <DependentUpon>201710301940283_addForeignKeyToImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

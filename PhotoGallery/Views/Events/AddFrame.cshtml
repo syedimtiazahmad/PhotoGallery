@@ -1,0 +1,36 @@
+﻿@model PhotoGallery.ViewModels.EventImageFrameViewModel
+@{
+    ViewBag.Title = "AddFrame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Frame</h2>
+
+<div class="row">
+    <div class="event-image col-lg-7 col-md-7 col-sm-7">
+        <div class="event-image-div">
+            <img src="@Model.Image.Path" class="edit-img" style="width: 500px; height: 280px;" />
+        </div>        
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5">
+        <div class="sample-frames">
+            @foreach (var frame in Model.Frames)
+            {
+                <div class="frame-div div-@frame.Name @frame.Name">
+                    <img src="~/Images/sample.jpg" class="sample-frame" data-val="@frame.Name" style="width: 200px; height: 200px;" />
+                </div>                
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        console.log("hehehel");
+        $(".frame-div").click(function() {
+            console.log('ccc');
+            var _class = $(this).find('img').attr("data-val");
+            $(".event-image-div").removeClass().addClass("event-image-div " + _class + " div-" + _class);
+        });
+    </script>
+}
