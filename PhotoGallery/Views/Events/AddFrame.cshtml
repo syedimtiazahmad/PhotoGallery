@@ -9,7 +9,9 @@
 <div class="row">
     <div class="event-image col-lg-7 col-md-7 col-sm-7">
         <div class="event-image-div">
-            <img src="@Model.Image.Path" class="edit-img" style="width: 500px; height: 280px;" />
+            <div class="inner-layout">
+                <img src="@Model.Image.Path" class="edit-img" style="width: 500px; height: 280px;" />
+            </div>
         </div>
         <div class="add-frame-form">
             @using (Html.BeginForm("CreateFrame", "Events", FormMethod.Post))
@@ -26,7 +28,9 @@
             @foreach (var frame in Model.Frames)
             {
                 <div class="frame-div div-@frame.Name @frame.Name">
-                    <img src="~/Images/sample.jpg" class="sample-frame" data-name="@frame.Name" data-id="@frame.Id" style="width: 200px; height: 200px;" />
+                    <div class="inner-layout @frame.Name">
+                        <img src="~/Images/sample.jpg" class="sample-frame" data-name="@frame.Name" data-id="@frame.Id" style="width: 200px; height: 200px;" />
+                    </div>
                 </div>
             }
         </div>
@@ -40,6 +44,7 @@
             console.log('ccc');
             var _class = $(this).find('img').attr("data-name");
             $(".event-image-div").removeClass().addClass("event-image-div " + _class + " div-" + _class);
+            $(".event-image-div").find(".inner-layout").removeClass().addClass("inner-layout " + _class);
             $("#hidden-frame-id").val($(this).find('img').attr("data-id"));
         });
     </script>

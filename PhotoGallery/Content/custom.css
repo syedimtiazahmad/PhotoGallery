@@ -1,4 +1,4 @@
-﻿.img{
+﻿.event-img, .img{
     width: 100%;
     height: 200px;
 }
@@ -93,28 +93,85 @@
 .add-frame-form{
     margin-top: 50px;
 }
+.overlay{
+    z-index: 1000;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    background-color: rgba(0,0,0,.8);
+}
+.inner-overlay{
+    background-color: black;
+    z-index: 1100;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    height: 400px;
+    width: 800px;    
+}
+.close-overlay.glyphicon-remove{
+    color: white;
+    float: right;
+    margin: 50px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.img-showcase, .overlay{display: none;}
 
 
 /* ======  Frames colors ======= */
-.Purple{
-    border: 4px solid purple;
-}
-.BurlyWood{
-    border: 4px solid #deb887;
-}
-.BlueGreen{
-    outline: 4px solid darkgreen;
-    border: 4px solid cadetBlue;
-}
-.RedOrangeGreen{
-    outline: 4px solid red;
-    border: 4px solid orange;
-}
-.div-RedOrangeGreen::before{
+.Purple::before{
     position:absolute;
     display:block;
     content: '';
-    border: 4px solid white;
     height: 100%;
     width: 100%;
+    border: 8px solid purple;
+}
+.BurlyWood::before{
+    position:absolute;
+    display:block;
+    content: '';
+    height: 100%;
+    width: 100%;
+    border: 8px solid #deb887;
+}
+.BlueGreen::before{
+    position:absolute;
+    display:block;
+    content: '';
+    height: 100%;
+    width: 100%;
+    outline: 4px solid darkgreen;
+    border: 4px solid cadetBlue;
+}
+.RedOrangeGreen::before{
+    position:absolute;
+    display:block;
+    content: '';
+    height: 100%;
+    width: 100%;
+    outline: 4px solid red;
+    border: 4px solid orange;
+}
+.inner-layout.RedOrangeGreen::before{
+    position: absolute;
+    display: block;
+    content: '';
+    height: 96%;
+    width: 96%;
+    border: 4px solid white;
+    outline: none;
+    margin: 4px;
+}
+.event-image-div .inner-layout.RedOrangeGreen::before{
+    position: absolute;
+    display: block;
+    content: '';
+    height: 97%;
+    width: 98.4%;
+    border: 4px solid white;
+    outline: none;
+    margin: 4px;
 }
