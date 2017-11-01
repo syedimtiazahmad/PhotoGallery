@@ -165,11 +165,16 @@ namespace PhotoGallery.Controllers
             return View(viewModel);
         }
 
-        [Route("createFrame")]
-        public ActionResult CreateFrame()
+        [Route("Images/CreateFrame")]
+        [HttpPost]
+        public ActionResult CreateFrame(EventImageFrameViewModel viewModel)
         {
-            AddFrames();
-            return View();
+            var img = _context.Image.SingleOrDefault(m => m.Id == viewModel.Image.Id);
+            img.FrameId = viewModel.Image.FrameId;
+            var frame = _context.Frame.SingleOrDefault(m => m.Id == viewModel.Image.FrameId);
+            AddFrame(frame, img);
+            _context.SaveChanges();
+            return RedirectToAction("Detail", new { id = img.EventId});
         }
 
 
@@ -179,51 +184,29 @@ namespace PhotoGallery.Controllers
             return Convert.ToInt32(Session["user_id"]);
         }
 
-        private void AddFrames()
+        private void AddFrame(Frame frame, PhotoGallery.Models.Image img)
         {
-            DoubleColorsFrame();
+            switch (frame.Code)
+            {
+                case 1:
+                    SinglePurpleFrame(img);
+                    break;
+                case 2:
+                    SingleBurlyWoodFrame(img);
+                    break;
+                case 3:
+                    DoubleColorsFrame(img);
+                    break;
+                case 4:
+                    TripleColorsFrame(img);
+                    break;
+            }
         }
 
-        private void SingleBurlyWoodFrame()
+        private void SinglePurpleFrame(PhotoGallery.Models.Image img)
         {
-            Response.Clear();
-            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
-            int height = bmp.Height;
-            int width = bmp.Width;
-
-            Bitmap bmp1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-
-            Graphics g = Graphics.FromImage(bmp);
-            Graphics g1 = Graphics.FromImage(bmp1);
-
-            g1.DrawImage(bmp,
-            new Rectangle(0, 0, width, height),
-            new Rectangle(0, 0, width, height),
-            GraphicsUnit.Pixel);
-
-            g1.TextRenderingHint = TextRenderingHint.AntiAlias;
-            Pen burlyWoodPen = new Pen(Brushes.BurlyWood);
-
-            burlyWoodPen.Width = 24.0F;
-            g1.DrawRectangle(burlyWoodPen, 0, 0, width, height);
-
-            string _imagepath = Server.MapPath("/Images/gamer.jpg");
-
-            g.Dispose();
-            bmp.Dispose();
-            System.IO.File.Delete(_imagepath);
-            bmp1.Save(_imagepath, ImageFormat.Jpeg);
-
-            g1.Dispose();
-
-            bmp1.Dispose();
-            Response.End();
-        }
-
-        private void SinglePurpleFrame()
-        {
-            Response.Clear();
-            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            //Response.Clear();
+            Bitmap bmp = new Bitmap(Server.MapPath(img.Path));
             int height = bmp.Height;
             int width = bmp.Width;
 
@@ -243,7 +226,7 @@ namespace PhotoGallery.Controllers
             purplePen.Width = 24.0F;
             g1.DrawRectangle(purplePen, 0, 0, width, height);
 
-            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+            string _imagepath = Server.MapPath(img.Path);
 
             g.Dispose();
             bmp.Dispose();
@@ -253,14 +236,51 @@ namespace PhotoGallery.Controllers
             g1.Dispose();
 
             bmp1.Dispose();
-            Response.End();
+            //Response.End();
         }
 
-        private void DoubleColorsFrame()
+        private void SingleBurlyWoodFrame(PhotoGallery.Models.Image img)
         {
-            Response.Clear();
 
-            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            //Response.Clear();
+            Bitmap bmp = new Bitmap(Server.MapPath(img.Path));
+            int height = bmp.Height;
+            int width = bmp.Width;
+
+            Bitmap bmp1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            Graphics g = Graphics.FromImage(bmp);
+            Graphics g1 = Graphics.FromImage(bmp1);
+
+            g1.DrawImage(bmp,
+            new Rectangle(0, 0, width, height),
+            new Rectangle(0, 0, width, height),
+            GraphicsUnit.Pixel);
+
+            g1.TextRenderingHint = TextRenderingHint.AntiAlias;
+            Pen burlyWoodPen = new Pen(Brushes.BurlyWood);
+
+            burlyWoodPen.Width = 24.0F;
+            g1.DrawRectangle(burlyWoodPen, 0, 0, width, height);
+
+            string _imagepath = Server.MapPath(img.Path);
+
+            g.Dispose();
+            bmp.Dispose();
+            System.IO.File.Delete(_imagepath);
+            bmp1.Save(_imagepath, ImageFormat.Jpeg);
+
+            g1.Dispose();
+
+            bmp1.Dispose();
+            //Response.End();
+        }
+
+        private void DoubleColorsFrame(PhotoGallery.Models.Image img)
+        {
+            //Response.Clear();
+
+            Bitmap bmp = new Bitmap(Server.MapPath(img.Path));
             int height = bmp.Height;
             int width = bmp.Width;
 
@@ -283,7 +303,7 @@ namespace PhotoGallery.Controllers
             g1.DrawRectangle(cadetBluePen, 5, 5, width - 12, height - 12);
             g1.DrawRectangle(darkGreenPen, 0, 0, width, height);
 
-            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+            string _imagepath = Server.MapPath(img.Path);
 
             //g.Dispose();
             bmp.Dispose();
@@ -293,14 +313,14 @@ namespace PhotoGallery.Controllers
             g1.Dispose();
 
             bmp1.Dispose();
-            Response.End();
+            //Response.End();
         }
 
-        private void TripleColorsFrame()
+        private void TripleColorsFrame(PhotoGallery.Models.Image img)
         {
-            Response.Clear();
+            //Response.Clear();
 
-            Bitmap bmp = new Bitmap(Server.MapPath("/Images/imgk.jpg"));
+            Bitmap bmp = new Bitmap(Server.MapPath(img.Path));
             int height = bmp.Height;
             int width = bmp.Width;
 
@@ -326,7 +346,7 @@ namespace PhotoGallery.Controllers
             g1.DrawRectangle(orangePen, 5, 5, width - 12, height - 12);
             g1.DrawRectangle(redPen, 0, 0, width, height);
 
-            string _imagepath = Server.MapPath("/Images/gamer.jpg");
+            string _imagepath = Server.MapPath(img.Path);
 
             //g.Dispose();
             bmp.Dispose();
@@ -336,7 +356,7 @@ namespace PhotoGallery.Controllers
             g1.Dispose();
 
             bmp1.Dispose();
-            Response.End();
+            //Response.End();
         }
     }
 }

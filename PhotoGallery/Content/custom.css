@@ -90,7 +90,9 @@
     display: inline-block;
     position: relative;
 }
-
+.add-frame-form{
+    margin-top: 50px;
+}
 
 
 /* ======  Frames colors ======= */
