@@ -27,7 +27,9 @@
             @Html.LabelFor(m => m.User.age)
             @Html.TextBoxFor(m => m.User.age, new { @class = "form-control" })
         </div>
-        if (Model.User.Role.Name == "Admin")
+
+        <!-- === User should be admin or this detail page should belongs to current user -->
+        if (Model.CurrentUser.RoleId == 1)
         {
             <div class="col-md-12 form-group">
                 @Html.LabelFor(m => m.User.Permission)<br />

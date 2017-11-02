@@ -9,5 +9,6 @@ namespace PhotoGallery.ViewModels
     {
         public IEnumerable<Role> Roles { get; set; }
         public User User { set; get; }
+        public User CurrentUser { set; get; }
     }
 }

@@ -40,7 +40,7 @@ namespace PhotoGallery.Controllers
             if (user_params == null)
                 return RedirectToAction("New");
             var user = _context.User.SingleOrDefault(m=>m.Email == user_params.Email);
-            if (user == null)
+            if (user == null || user.Password != user_params.Password)
                 return RedirectToAction("New");
             Session["user_id"] = user.Id;
             Session["user_email"] = user.Email;

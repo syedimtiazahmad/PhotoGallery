@@ -24,9 +24,9 @@
                     <td>@user.Email</td>
                     <td>@user.age</td>
                     <td>
-                        @Html.ActionLink("Detail", "Detail", "Users", new { id= Convert.ToInt32(Session["user_id"])}, null) |
-                        @Html.ActionLink("Edit", "Edit", "Users", new { id = Convert.ToInt32(Session["user_id"]) }, null) |
-                        @Html.ActionLink("Delete", "Delete", "Users", new { id = Convert.ToInt32(Session["user_id"]) }, new { onclick = "return confirm('Are you sure you?');" } )
+                        @Html.ActionLink("Detail", "Detail", "Users", new { id= user.Id}, null) |
+                        @Html.ActionLink("Edit", "Edit", "Users", new { id = user.Id }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Users", new { id = user.Id }, new { onclick = "return confirm('Are you sure you?');" } )
                     </td>
                 </tr>
             }

@@ -46,10 +46,13 @@ namespace PhotoGallery.Controllers
             if (UserSession() == 0)
                 return RedirectToAction("New", "Sessions");
             var user = _context.User.SingleOrDefault(m => m.Id == id);
+            var user_id = UserSession();
+            var current_user = _context.User.SingleOrDefault(m => m.Id == user_id);
             var viewModel = new UserFormViewModel
             {
                 Roles = _context.Role.ToList(),
-                User  = user
+                User  = user,
+                CurrentUser = current_user
             };
             return View(viewModel);
         }

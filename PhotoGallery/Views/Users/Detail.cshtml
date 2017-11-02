@@ -20,7 +20,8 @@
     <div class="col-md-12">
         @Html.LabelFor(m => m.age): @Model.age
     </div>
-    @if(Model.RoleId == 1)      // user equal to admin
+    <!-- === User should be admin or this detail page should belongs to current user -->
+    @if(Convert.ToInt32(Session["user_Id"]) == 1 || Convert.ToInt32(Session["user_Id"]) == Model.Id)
     {
         <div class="col-md-12">
             @Html.LabelFor(m=> m.Permission): @Model.Permission

@@ -18,14 +18,14 @@
         {
             if (i % 2 != 0)
             {
-                <div class="grid-item grid-item--width2">
+                <div class="grid-item">
                     <a href="/Events/Detail/@Model.Events.ToList()[i].Id" class="img-anchor">
-                        <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" />
+                        <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" alt="event-img"/>
                     </a>
                     <div>
                         <strong>@Model.Events.ToList()[i].Name</strong><br />
                         <small>@Model.Events.ToList()[i].location</small>
-                        <p>@Model.Events.ToList()[i].Description</p>
+                        <p class="event-paragraph">@Model.Events.ToList()[i].Description</p>
                     </div>
                 </div>
             }
@@ -33,7 +33,7 @@
             {
                 <div class="grid-item">
                     <a href="/Events/Detail/@Model.Events.ToList()[i].Id" class="img-anchor">
-                        <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" />
+                        <img src="@Model.Events.ToList()[i].Images.FirstOrDefault().Path" class="img" alt="event-img"/>
                     </a>
                     <div>
                         <strong>@Model.Events.ToList()[i].Name</strong><br />
