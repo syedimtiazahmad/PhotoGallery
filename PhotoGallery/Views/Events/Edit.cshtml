@@ -13,6 +13,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Event.Name)<br />
             @Html.TextBoxFor(m => m.Event.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m=>m.Event.Name)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Event.location)<br />
@@ -21,6 +22,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Event.Description)<br />
             @Html.TextAreaFor(m => m.Event.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Event.Description)
         </div>
         @Html.Hidden("Event.UserId", Session["user_id"])
         <div class="form-group">
@@ -28,6 +30,7 @@
             <input type="file" name="UploadedImages" multiple />
         </div><br />
         @Html.HiddenFor(m => m.Event.Id)
-        <button class="btn btn-primary" type="submit">Update</button>
+        <button class="btn btn-primary" type="submit">Update</button><span> | </span>
+        @Html.ActionLink("Back", "Detail", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" })
     }
 </div>

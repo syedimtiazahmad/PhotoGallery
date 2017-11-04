@@ -50,9 +50,8 @@ namespace PhotoGallery.Controllers
         public ActionResult Index(EventsParametersViewModel event_params)
         {
             var dbEvents = _context.Event.Include(e => e.Images);
-            if (Convert.ToInt32(event_params.user_id) != 0)
+            if (event_params.user_id != null && Convert.ToInt32(event_params.user_id) != 0)
                 dbEvents = dbEvents.Where(e => e.UserId == event_params.user_id);
-            //dbEvents = dbEvents.Where(m=>m.Name.Contains("Hallow"));
             if (event_params != null && event_params.search != null)
                 dbEvents = dbEvents.Where(e => e.Name.Contains(event_params.search) || e.location.Contains(event_params.search) );
             var viewModel = new EventFormViewModel
@@ -69,21 +68,28 @@ namespace PhotoGallery.Controllers
             {
                 Event = dbEvent
             };
-            //if (UserSession() == 0)
-            //    return RedirectToAction("Index", "Sessions");
+            if (UserSession() == 0)
+                return RedirectToAction("Index", "Sessions");
             return View(viewModel);
         }
 
         public ActionResult Create(EventFormViewModel eventModel)
         {
-            //if (UserSession() == 0)
-            //    return RedirectToAction("Index", "Events");
-            //_context.Event.Add(eventModel.Event);
+            if (UserSession() == 0)
+                return RedirectToAction("Index", "Events");
+            if (!ModelState.IsValid)
+            {
+                var dbEvent = new Event();
+                var viewModel = new EventFormViewModel
+                {
+                    Event = dbEvent
+                };
+                return View("New", viewModel);
+            }
             _context.Event.Add(eventModel.Event);
             _context.SaveChanges();
             int id = eventModel.Event.Id;
-            //ArrayList _filenames = new ArrayList();
-            //ArrayList _filePath = new ArrayList();
+
             if (eventModel.UploadedImages[0] != null)
             {
                 foreach (var img in eventModel.UploadedImages)
@@ -121,7 +127,18 @@ namespace PhotoGallery.Controllers
         [HttpPut]
         public ActionResult Update(EventFormViewModel eventModel)
         {
+            if (UserSession() == 0)
+                return RedirectToAction("Index", "Sessions");
             var dbEvent = _context.Event.SingleOrDefault(m => m.Id == eventModel.Event.Id);
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new EventFormViewModel
+                {
+                    Event = dbEvent
+                };
+                return View("Edit", viewModel);
+            }
             dbEvent.Name = eventModel.Event.Name;
             dbEvent.Description = eventModel.Event.Description;
             dbEvent.UserId = eventModel.Event.UserId;
@@ -152,6 +169,24 @@ namespace PhotoGallery.Controllers
             _context.SaveChanges();
             return RedirectToAction("Detail", new { id = eventModel.Event.Id });
         }
+
+        [HttpGet]
+        [Route("Events/Delete/{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            if (UserSession() == 0)
+                return RedirectToAction("New", "Sessions");
+            var current_event = _context.Event.SingleOrDefault(u => u.Id == id);
+            var current_event_images = _context.Image.Where(m => m.EventId == current_event.Id);
+            foreach (PhotoGallery.Models.Image img in current_event_images)
+            {
+                _context.Image.Remove(img);
+            }
+            _context.Event.Remove(current_event);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Events");
+        }
+
         [Route("Events/Images/{id:int}/AddFrame")]
         public ActionResult AddFrame(int id)
         {

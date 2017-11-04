@@ -274,6 +274,18 @@
     <Compile Include="Migrations\201711022026092_PopulateAdminUser.Designer.cs">
       <DependentUpon>201711022026092_PopulateAdminUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711041928111_AddValidtionsToEvents.cs" />
+    <Compile Include="Migrations\201711041928111_AddValidtionsToEvents.Designer.cs">
+      <DependentUpon>201711041928111_AddValidtionsToEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711041936253_AddNewValidtionsToEvents.cs" />
+    <Compile Include="Migrations\201711041936253_AddNewValidtionsToEvents.Designer.cs">
+      <DependentUpon>201711041936253_AddNewValidtionsToEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711042002554_AddNewValidtionsToEvents1.cs" />
+    <Compile Include="Migrations\201711042002554_AddNewValidtionsToEvents1.Designer.cs">
+      <DependentUpon>201711042002554_AddNewValidtionsToEvents1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -428,6 +440,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711022026092_PopulateAdminUser.resx">
       <DependentUpon>201711022026092_PopulateAdminUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711041928111_AddValidtionsToEvents.resx">
+      <DependentUpon>201711041928111_AddValidtionsToEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711041936253_AddNewValidtionsToEvents.resx">
+      <DependentUpon>201711041936253_AddNewValidtionsToEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711042002554_AddNewValidtionsToEvents1.resx">
+      <DependentUpon>201711042002554_AddNewValidtionsToEvents1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

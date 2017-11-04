@@ -42,7 +42,8 @@
     {
         <div class="row event-btns-section">
             <div class="btns-section">
-                @Html.ActionLink("Edit", "Edit", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Edit", "Edit", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" }) <span> | </span>
+                @Html.ActionLink("Delete", "Delete", "Events", new { id = Model.Event.Id }, new { @class = "btn btn-primary" })
             </div>
         </div>
     }
